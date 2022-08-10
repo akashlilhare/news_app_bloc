@@ -23,21 +23,20 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
-        title: Text("News App"),
+        title: const Text("News App"),
       ),
       body: BlocBuilder<LoadDataBloc, LoadDataState>(
         builder: (context, state) {
           if (state is LoadDataLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is LoadDataSuccessful) {
             return SingleChildScrollView(
               child: Column(
-                children: [
-                  ...state.newsData.articles.map((e) => BuildCard(
-                        articles: e,
-                      ))
-                ],
-              ),
+                  children: state.newsData.articles
+                      .map((e) => BuildCard(
+                            articles: e,
+                          ))
+                      .toList()),
             );
           } else {
             return Center(
@@ -58,24 +57,24 @@ class BuildCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       child: Card(
         child: Container(
-          padding: EdgeInsets.only(left: 12, right: 12, bottom: 12),
+          padding: const EdgeInsets.only(left: 12, right: 12, bottom: 12),
           child: Column(
             children: [
               Image.network(articles.urlToImage),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Text(
                 articles.title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Text(articles.description)
